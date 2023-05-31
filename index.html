@@ -1,0 +1,66 @@
+<link rel="stylesheet" href="styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+
+
+<div class="cell" id="prev">
+    <img />
+</div>
+
+<div class="cell" id="current">
+    <img />
+</div>
+
+<h1><span></span></h1>
+
+<script>
+
+    var currentImage = '';
+
+    function load() {
+           fetch('/data.php')
+          .then(response => response.json())
+          .then(data => {
+
+            if (currentImage === data.url) return;
+
+            document.querySelector('h1 span').innerText = data.title;
+
+
+            document.querySelector('#current img').setAttribute('src', data.url);
+            document.querySelector('#prev img').setAttribute('src', data.lastUrl);
+            currentImage = data.url;
+
+            return;
+
+            // Didn't get the carousel working...
+            currentImage = data.url;
+
+
+            var img = document.createElement('img');
+            img.setAttribute('src', data.url);
+            var cell = document.createElement('div');
+            cell.setAttribute('id', 'next');
+            cell.classList.add('cell');
+            cell.appendChild(img);
+            document.body.appendChild(cell);
+
+            document.body.classList.add('sliding');
+
+            setTimeout(function() {
+                var prev = document.querySelector('#previous');
+                prev.parentNode.removeChild(prev);
+                document.querySelector('#current').setAttribute('id', 'previous');
+                document.querySelector('#next').setAttribute('id', 'current');
+                document.body.classList.remove('sliding');
+            }, 1100);
+          });
+    }
+
+    setInterval(load, 2000);
+    load();
+
+
+</script>
+

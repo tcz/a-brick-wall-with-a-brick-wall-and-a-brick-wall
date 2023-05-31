@@ -1,0 +1,42 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.cell {
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 1s;
+}
+
+body.sliding .cell {
+    transform: translateX(-50vh);
+}
+
+img {
+    width: 80vh;
+    height: 80vh;
+}
+
+h1 {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 5vh;
+    text-align: center;
+}
+
+h1 span {
+    background: rgba(0,0,0,0.7);
+    color: white;
+    font-size: 4vh;
+    font-family: Montserrat;
+    font-weight: 500;
+    padding: 1vh 2vh;
+}
